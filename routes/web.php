@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', [Tincontroller::class, 'index']);
-Route::get('/lien-he', [Tincontroller::class, 'lienhe']);
-Route::get('/ct/{id}', [Tincontroller::class, 'lay1tin']);
-Route::get('/tt', [TTSVController::class, 'ttsv']);
+Route::get('/lien-he', [Tincontroller::class, 'lienHe']);
+Route::get('/ct/{id}/{name}', [Tincontroller::class, 'lay1Tin']);
+Route::get('/thong-tin-sinh-vien', [TTSVController::class, 'ttsv']);
+Route::get('update-user', [Tincontroller::class, 'updateUser']);
+Route::get('list-user', [Tincontroller::class, 'listUser']);
