@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Tincontroller;
 use App\Http\Controllers\TTSVController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,6 @@ Route::get('/lien-he', [Tincontroller::class, 'lienHe']);
 Route::get('/ct/{id}/{name}', [Tincontroller::class, 'lay1Tin']);
 Route::get('/thong-tin-sinh-vien', [TTSVController::class, 'ttsv']);
 Route::get('update-user', [Tincontroller::class, 'updateUser']);
-Route::get('list-user', [Tincontroller::class, 'listUser']);
+
+///////////////////////////////////////////////////////////////////////
+Route::get('list-user', [UserController::class, 'showUser']);
