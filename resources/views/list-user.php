@@ -18,12 +18,12 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $value): ?>
-            <tr>
-                <td><?= $value[id] ?></td>
-                <td><?= $value[name] ?></td>
+            <?php foreach ($users as $value) : ?>
+                <tr>
+                    <td><?php $value['id'] ?></td>
+                    <td><?php $value['name'] ?></td>
 
-            </tr>
+                </tr>
             <?php endforeach ?>
         </tbody>
     </table>

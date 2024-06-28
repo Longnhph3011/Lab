@@ -35,9 +35,9 @@ class Tincontroller extends Controller
                 'name' => 'longg'
             ]
         ];
-        // return view('list-user')->with([
-        //     'users' => $users
-        // ]);
-        return view('list-user', compact('users'));
+        return view('list-user')->with([
+            'users' => $users
+        ]);
+        // return view('list-user', compact('users'));
     }
 }
