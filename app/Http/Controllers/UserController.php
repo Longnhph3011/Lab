@@ -108,6 +108,66 @@ class UserController extends Controller
         // }
         ///////////////////////
         // Câu 15 : Xóa user nghỉ trên 15 ngày
-        $result = DB::table('users')->where('songaynghi', '>', '15')->delete();
+        // $result = DB::table('users')->where('songaynghi', '>', '15')->delete();
+    }
+
+
+    public function listUsers()
+    {
+        $listUsers = DB::table('users')->join('phongban', 'phongban.id', '=', 'users.phongban_id')
+            ->select('users.name', 'users.id', 'users.email', 'users.phongban_id', 'phongban.ten_donvi')
+            ->orderBy('id', 'DESC')
+            ->get();
+        return view('users/listUsers')->with([
+            'listUsers' => $listUsers
+        ]);
+    }
+    public function addUsers()
+    {
+        $phongBan = DB::table('phongban')->select('id', 'ten_donvi')->get();
+        return view('users/addUsers')->with(['phongBan' => $phongBan]);
+    }
+    public function addPostUser(Request $req)
+    {
+        $data = [
+            'name' => $req->nameUser,
+            'email' => $req->emailUser,
+            'phongban_id' => $req->phongBanUser,
+            'tuoi' => $req->tuoiUser,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+
+        ];
+        DB::table('users')->insert($data);
+        return redirect()->route('users.listUsers');
+    }
+    public function deleteUser($idUser)
+    {
+        DB::table('users')->where('id', $idUser)->delete();
+        return redirect()->route('users.listUsers');
+    }
+    public function updateUser($idUser)
+    {
+        $phongBan = DB::table('phongban')->select('id', 'ten_donvi')->get();
+        $user = DB::table('users')->where('id', $idUser)->first();
+        return view('users/updateUsers')->with([
+            'user' => $user,
+            'phongBan' => $phongBan
+        ]);
+    }
+    public function updatePostUsers(Request $req)
+    {
+        $data = [
+            'name' => $req->nameUser,
+            'email' => $req->emailUser,
+            'phongban_id' => $req->phongBanUser,
+            'tuoi' => $req->tuoiUser,
+            'songaynghi' => $req->songaynghi,
+            'updated_at' => Carbon::now()
+
+        ];
+
+        DB::table('users')->where('id', $req->idUser)->update($data);
+        return redirect()->route('users.listUsers');
     }
 }
