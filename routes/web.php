@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\sanPhamController;
 use App\Http\Controllers\Tincontroller;
 use App\Http\Controllers\TTSVController;
 use App\Http\Controllers\UserController;
@@ -36,4 +37,13 @@ Route::group(['prefix' => 'user', 'as' => 'users.'], function () {
     Route::get('delete-users/{idUser}', [UserController::class, 'deleteUser'])->name('deleteUser');
     Route::get('update-users/{idUser}', [UserController::class, 'updateUser'])->name('updateUser');
     Route::post('update-users', [UserController::class, 'updatePostUsers'])->name('updatePostUsers');
+});
+Route::group(['prefix' => 'sanpham', 'as' => 'sanpham.'], function () {
+    Route::get('list-sanpham', [sanPhamController::class, 'listSanPham'])->name('listSanPham');
+    Route::get('add-sanpham', [sanPhamController::class, 'addSanPham'])->name('addSanPham');
+    Route::post('add-sanpham', [sanPhamController::class, 'addPostSanPham'])->name('addPostSanPham');
+    Route::get('delete-sanpham/{idSanPham}', [sanPhamController::class, 'deleteSanPham'])->name('deleteSanPham');
+    Route::get('update-sanpham/{idSanPham}', [sanPhamController::class, 'updateSanPham'])->name('updateSanPham');
+    Route::post('update-sanpham', [sanPhamController::class, 'updatePostSanPham'])->name('updatePostSanPham');
+    Route::get('search', [sanPhamController::class, 'search'])->name('search');
 });
