@@ -13,8 +13,10 @@ class sanPhamController extends Controller
         $listSanPham = DB::table('products')->join('category', 'category.id', '=', 'products.category_id')
             ->select('products.name', 'products.id', 'products.price', 'products.view', 'products.category_id', 'category.name as namecate')
             // ->select('*')
-            ->orderBy('view', 'DESC')
+            ->orderBy('products.view', 'DESC')
             ->get();
+
+        // dd($listSanPham);
         // return $listSanPham;
         return view('sanpham/listSanPham')->with([
             'listSanPham' => $listSanPham
@@ -69,10 +71,15 @@ class sanPhamController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $products = DB::table('products')
-            ->where('name', 'LIKE', "%{$query}%")
+        $products = DB::table('products')->join('category', 'category.id', '=', 'products.category_id')
+            ->select('products.name', 'products.id', 'products.price', 'products.view', 'products.category_id', 'category.name as namecate')
+            ->where('products.name', 'LIKE', "%{$query}%")->orderBy('view', 'DESC')
             ->get();
 
         return view('sanpham.listSanPham', ['listSanPham' => $products]);
+    }
+    public function test()
+    {
+        return view('admin/products/list-product');
     }
 }

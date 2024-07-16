@@ -47,3 +47,6 @@ Route::group(['prefix' => 'sanpham', 'as' => 'sanpham.'], function () {
     Route::post('update-sanpham', [sanPhamController::class, 'updatePostSanPham'])->name('updatePostSanPham');
     Route::get('search', [sanPhamController::class, 'search'])->name('search');
 });
+
+
+Route::get('test', [sanPhamController::class, 'test']);

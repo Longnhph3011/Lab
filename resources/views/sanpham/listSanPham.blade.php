@@ -71,13 +71,15 @@
 <body>
     <a class="btn btn-success" href="{{ route('sanpham.addSanPham') }}">Thêm mới</a>
     <form action="{{ route('sanpham.search') }}" method="GET">
-        <input type="text" name="query" placeholder="Search products...">
-        <button type="submit">Search</button>
+
+        <input class="form-control form-control-lg" type="text" placeholder="Tên sản phẩm"
+            aria-label=".form-control-lg example" name="query">
+        <button type="submit" class="btn btn-success">Search</button>
     </form>
 
     <div class="container">
         @if (isset($listSanPham) && $listSanPham->isEmpty())
-            <p>No products found.</p>
+            <p>Không có sản phẩm</p>
         @else
             <table class="table">
                 <thead>
@@ -95,7 +97,7 @@
                         <tr>
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->category_id }}</td>
+                            <td>{{ $item->namecate }}</td>
                             <td>{{ $item->price }}</td>
                             <td>{{ $item->view }}</td>
                             <td>
